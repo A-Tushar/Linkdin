@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Login = () => {
   return (
@@ -13,15 +14,9 @@ const Login = () => {
 </defs>
     </svg>
     <h1 className="text-4xl font-normal font-main-font text-primary-color text-center mt-10 ">
-    Get started with easily register</h1>
+    Login</h1>
     <p className='text-xl font-normal font-main-font text-primary-color text-center mt-3'>
       Free register and you can enjoy it</p>
-
-        <input
-        type="text"
-        placeholder='Your Full Name'
-        className="block mx-auto my-10 h-20 w-1/4 rounded-md border-0 py-1.5 pl-7 pr-20 font-normal text-xl font-main-font text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600  placeholder:font-normal placeholder:text-xl"
-        />
         <input
         type="email"
         placeholder='Your Email adress'
@@ -34,7 +29,9 @@ const Login = () => {
         />
 
         <button className='block text-center mx-auto mt-10 h-20 w-1/4 rounded-md border-0 py-1.5 font-bold text-2xl font-main-font text-white bg-sky-800 '>Sing Up</button>
-        <p className='text-center  text-lg font-normal font-main-font text-primary-color '>Already Have And Account ? <span className='text-orange-600 text-base font-extrabold cursor-pointer '>Sing In</span></p>
+        <p className='text-center  text-lg font-normal font-main-font text-primary-color '>Create an Account ? 
+        <Link to={'/'}><span className='text-orange-600 text-base font-extrabold cursor-pointer '>Sing Up</span></Link>
+        </p>
        
     </>
   )
