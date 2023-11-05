@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { Link , useNavigate } from 'react-router-dom'
+import { getAuth, createUserWithEmailAndPassword, sendEmailVerification,updateProfile } from "firebase/auth";
+import { toast , ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { ColorRing } from 'react-loader-spinner';
 
 const Registration = () => {
   
@@ -13,6 +16,8 @@ const Registration = () => {
    let [passworderror,setPassworderror]=useState("")
    let [nameerror,setNameerror]=useState("")
    let [emailerror,setEmailerror]=useState("")
+   let [load,setload]= useState(false);
+   let navigate = useNavigate();
 
   let handlechange =(e)=>{
     setFromdata({
@@ -42,17 +47,71 @@ const Registration = () => {
       if(!pattern.test(fromdata.email)){
         setEmailerror("Need a Valid Email")
       }
-      console.log(fromdata);
+      setload(true)
+      createUserWithEmailAndPassword(auth, fromdata.email, fromdata.password)
+      .then((user) => {
+        console.log("done", user.user);
+        sendEmailVerification(auth.currentUser).then(()=>{
+          console.log("email send ");
 
-      // createUserWithEmailAndPassword(auth, fromdata.email, fromdata.password)
-      // .then((user) => {
-      //   console.log("done");
-      // })
-      // .catch((error) => {
-      //   const errorCode = error.code;
-      //   const errorMessage = error.message;
-      //   // ..
-      // });
+          updateProfile(auth.currentUser, {
+            displayName: fromdata.fullname , 
+            photoURL: "https://firebasestorage.googleapis.com/v0/b/chattingapp-fea0a.appspot.com/o/A.jpg?alt=media&token=a0a5470e-a054-4942-bb89-eefbd873ee62&_gl=1*11pau0d*_ga*MTA2ODQ0MjYyMi4xNjkxOTUwMzU3*_ga_CW55HF8NVT*MTY5NzY1MTg2My4xNS4xLjE2OTc2NTM2MDguNDkuMC4w"
+          }).then(() => {
+           
+           console.log(user.user);
+            setFromdata({
+              fullname:"",
+              email:"",
+              password:""
+            })
+            
+            toast.success('Registration Succesfull !', {
+              position: "bottom-center",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+              });
+    
+              setTimeout(() => {
+                navigate("/login")
+              }, 1000);
+          })
+        }).then(()=>{
+          console.log("verify email send ");
+          // set(ref(db, 'users/'+user.user.uid), {
+          //   username:fromdata.fullname,
+          //   email: fromdata.email,
+          //   profile_picture :"https://firebasestorage.googleapis.com/v0/b/chattingapp-fea0a.appspot.com/o/A.jpg?alt=media&token=a0a5470e-a054-4942-bb89-eefbd873ee62&_gl=1*11pau0d*_ga*MTA2ODQ0MjYyMi4xNjkxOTUwMzU3*_ga_CW55HF8NVT*MTY5NzY1MTg2My4xNS4xLjE2OTc2NTM2MDguNDkuMC4w", 
+          // });
+        })
+        setload(false)
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ..
+        if(errorCode.includes("email")){
+          setEmailerror("Email Already Used !")
+
+          toast.error('Email Already Used !', {
+            position: "bottom-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            });
+          setload(false)
+        }
+
+      });
       
     }
 
@@ -77,6 +136,7 @@ const Registration = () => {
 
         <input
         onChange={handlechange} name='fullname'
+        value={fromdata.fullname}
         type="text"
         placeholder='Your Full Name'
         className="block mx-auto my-10 h-20 w-1/4 rounded-md border-0 py-1.5 pl-7 pr-20 font-normal text-xl font-main-font text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600  placeholder:font-normal placeholder:text-xl"
@@ -85,6 +145,7 @@ const Registration = () => {
           {nameerror}
         </p> }
         <input onChange={handlechange} name='email'
+        value={fromdata.email}
         type="email"
         placeholder='Your Email adress'
         className="block mx-auto my-10 h-20 w-1/4 rounded-md border-0 py-1.5 pl-7 pr-20 font-normal text-xl font-main-font text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600  placeholder:font-normal placeholder:text-xl"
@@ -93,6 +154,7 @@ const Registration = () => {
           {emailerror}
         </p> }
         <input onChange={handlechange} name='password'
+        value={fromdata.password}
         type="password"
         placeholder='Password'
         className="block mx-auto my-10 h-20 w-1/4 rounded-md border-0 py-1.5 pl-7 pr-20 font-normal text-xl font-main-font text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600  placeholder:font-normal placeholder:text-xl"
@@ -101,10 +163,25 @@ const Registration = () => {
           {passworderror}
         </p> }
 
-        <button onClick={handlesingup} className='block text-center mx-auto mt-10 h-20 w-1/4 rounded-md border-0 py-1.5 font-bold text-2xl font-main-font text-white bg-sky-800 '>Sing Up</button>
-        <p className='text-center  text-lg font-normal font-main-font text-primary-color '>Already Have And Account ?
+        {load ?
+                <button className='flex justify-center  mx-auto mt-10 h-20 w-1/4 rounded-md border-0 py-1.5 font-bold text-2xl font-main-font text-white bg-sky-800 '>
+                  <ColorRing
+                  visible={true}
+                  height="60"
+                  width="60"
+                  ariaLabel="blocks-loading"
+                  wrapperStyle={{}}
+                  wrapperClass="blocks-wrapper"
+                  colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
+                />
+                </button>
+                :
+                <button onClick={handlesingup} className='block text-center mx-auto mt-10 h-20 w-1/4 rounded-md border-0 py-1.5 font-bold text-2xl font-main-font text-white bg-sky-800 '>Sing Up</button>
+                }
+        <p className='text-center  text-lg font-normal font-main-font text-primary-color '>Already Have An Account ?
         <Link to={'login'}> <span className='text-orange-600 text-base font-extrabold cursor-pointer '>Sing In</span></Link>
         </p>
+        
       
        
     </>
