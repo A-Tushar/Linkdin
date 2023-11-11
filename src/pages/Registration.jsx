@@ -1,12 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link , useNavigate } from 'react-router-dom'
 import { getAuth, createUserWithEmailAndPassword, sendEmailVerification,updateProfile } from "firebase/auth";
 import { toast , ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ColorRing } from 'react-loader-spinner';
+import { logeduser } from '../slices/activeSlice';
+import { useSelector, useDispatch, } from 'react-redux';
 
 const Registration = () => {
-  
+  let data = useSelector (state=>state.active.value)
   const auth = getAuth();
   let [fromdata,setFromdata] =useState({
     fullname:"",
@@ -28,6 +30,13 @@ const Registration = () => {
     setEmailerror("")
     setPassworderror("")
   }
+  useEffect(()=>{
+    if(data){
+      navigate("/home")
+    }else{
+      navigate("/login")
+    }
+  },[])
 
   let handlesingup = ()=>{
 

@@ -1,12 +1,15 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { Link , useNavigate } from 'react-router-dom'
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { toast , ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ColorRing } from 'react-loader-spinner';
+import { useDispatch, useSelector } from 'react-redux';
+import { logeduser } from '../slices/activeSlice';
 
 const Login = () => {
-
+  let data = useSelector (state=>state.active.value)
+  let dispatch = useDispatch()
   const auth = getAuth();
 
   let [fromdata,setFromdata] =useState({
@@ -17,6 +20,12 @@ const Login = () => {
   let [emailerror,setEmailerror]=useState("");
   let [load,setload]= useState(false);
   let navigate = useNavigate();
+
+  useEffect(()=>{
+    if(data){
+      navigate("/home")
+    }
+  },[])
 
   let handlechange =(e)=>{
     setFromdata({
@@ -44,7 +53,7 @@ const Login = () => {
 
       setload(true)
       signInWithEmailAndPassword(auth, fromdata.email, fromdata.password).then((user)=>{
-        console.log('');
+       
         if(!user.user.emailVerified){
           toast.error('Please Verify Your Email !', {
             position: "bottom-center",
@@ -69,8 +78,8 @@ const Login = () => {
           });
           setTimeout(() => {
             navigate("/home");
-            // dispatch(logeduser(user.user))
-            // localStorage.setItem("user", JSON.stringify(user.user))
+            dispatch(logeduser(user.user))
+            localStorage.setItem("user", JSON.stringify(user.user))
           }, 1000);
         }
         
@@ -112,29 +121,6 @@ const Login = () => {
             theme: "light",
             });
         }
-
-        if(errorCode.includes("wrong-password")){
-         setPassworderror("wrong-password")
-          setload(false)
-        }
-        if(errorCode.includes("email")){
-          setEmailerror("Email Already Used !")
-          setload(false)
-        }
-        if(errorCode.includes("user-not-found")){
-          setEmailerror("No Account Created !")
-          toast.error('Account Not Found ! Creat an Account First.', {
-          position: "bottom-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          });
-          setload(false)
-        }
         if(errorCode.includes("disabled")){
           toast.error('this account has been temporarily disabled due to many failed login attempts', {
           position: "bottom-center",
@@ -148,7 +134,6 @@ const Login = () => {
           });
           setload(false)
         }
-        console.log(errorCode,errorMessage);
        setload(false)
       });
     }
