@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link , useNavigate } from 'react-router-dom'
 import { getAuth, createUserWithEmailAndPassword, sendEmailVerification,updateProfile } from "firebase/auth";
+import { getDatabase, ref, set,push } from "firebase/database";
 import { toast , ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ColorRing } from 'react-loader-spinner';
@@ -8,6 +9,7 @@ import { logeduser } from '../slices/activeSlice';
 import { useSelector, useDispatch, } from 'react-redux';
 
 const Registration = () => {
+  const db = getDatabase();
   let data = useSelector (state=>state.active.value)
   const auth = getAuth();
   let [fromdata,setFromdata] =useState({
@@ -33,10 +35,7 @@ const Registration = () => {
   useEffect(()=>{
     if(data){
       navigate("/home")
-    }else{
-      navigate("/login")
-    }
-  },[])
+    } },[])
 
   let handlesingup = ()=>{
 
@@ -92,11 +91,11 @@ const Registration = () => {
           })
         }).then(()=>{
           console.log("verify email send ");
-          // set(ref(db, 'users/'+user.user.uid), {
-          //   username:fromdata.fullname,
-          //   email: fromdata.email,
-          //   profile_picture :"https://firebasestorage.googleapis.com/v0/b/chattingapp-fea0a.appspot.com/o/A.jpg?alt=media&token=a0a5470e-a054-4942-bb89-eefbd873ee62&_gl=1*11pau0d*_ga*MTA2ODQ0MjYyMi4xNjkxOTUwMzU3*_ga_CW55HF8NVT*MTY5NzY1MTg2My4xNS4xLjE2OTc2NTM2MDguNDkuMC4w", 
-          // });
+          set(ref(db, 'users/'+user.user.uid), {
+            username:fromdata.fullname,
+            email: fromdata.email,
+            profile_picture :"https://firebasestorage.googleapis.com/v0/b/chattingapp-fea0a.appspot.com/o/A.jpg?alt=media&token=a0a5470e-a054-4942-bb89-eefbd873ee62&_gl=1*11pau0d*_ga*MTA2ODQ0MjYyMi4xNjkxOTUwMzU3*_ga_CW55HF8NVT*MTY5NzY1MTg2My4xNS4xLjE2OTc2NTM2MDguNDkuMC4w", 
+          });
         })
         setload(false)
       })
@@ -188,7 +187,7 @@ const Registration = () => {
                 <button onClick={handlesingup} className='block text-center mx-auto mt-10 h-20 w-1/4 rounded-md border-0 py-1.5 font-bold text-2xl font-main-font text-white bg-sky-800 '>Sing Up</button>
                 }
         <p className='text-center  text-lg font-normal font-main-font text-primary-color '>Already Have An Account ?
-        <Link to={'login'}> <span className='text-orange-600 text-base font-extrabold cursor-pointer '>Sing In</span></Link>
+        <Link to={'/login'}> <span className='text-orange-600 text-base font-extrabold cursor-pointer '>Sing In</span></Link>
         </p>
         
       
