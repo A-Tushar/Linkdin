@@ -14,6 +14,7 @@ import { Link , useNavigate } from 'react-router-dom'
 const Navbar = () => {
   // const db = getDatabase();
   let dispatch = useDispatch()
+  let userdata = useSelector((state)=>(state.active.value));
   const auth = getAuth();
   let [load,setload]= useState(false);
   let navigate = useNavigate();
@@ -74,15 +75,15 @@ const Navbar = () => {
   }
   return (
    <>
-   <div className="w-100% h-20 border-solid flex justify-between items-center">
+   <div className="w-100% h-20 border-solid flex justify-between items-center border-b border-b-slate-500">
     <div className="h-20 w-1/2 p-5 text-center box-border">
       <Image src={logo} alt={"logo"} />
     </div>
-    <div className="w-1/5 h-20 p-5 text-end text-xl font-main-font text-rose-700">
-      <h2>HEllO WOrld</h2>
+    <div className="w-1/5 h-20 py-5 text-end text-xl font-extrabold font-main-font text-black">
+      <h2>{userdata.displayName}</h2>
     </div>
     <div className="w-1/5 h-20 p-5 flex justify-between">
-      <Image src={logo}/>
+      <Image src={userdata.photoURL}/>
       <button
        className='border-2 border-solid px-5 text-white bg-sky-800 rounded-xl text-center box-border hover:bg-sky-400 duration-300' 
        onClick={handlelogout}>Sing Out</button>
