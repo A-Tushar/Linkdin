@@ -72,12 +72,18 @@ const Navbar = () => {
         theme: "light",
         });
     });
+  };
+
+  let handlehome=()=>{
+    navigate("/home")
   }
+
   return (
    <>
    <div className="w-100% h-20 border-solid flex justify-between items-center border-b border-b-slate-500">
-    <div className="h-20 w-1/2 p-5 text-center box-border">
-      <Image src={logo} alt={"logo"} />
+    <div className="h-20 w-1/2 p-5 text-left box-border">
+      <div onClick={handlehome} className='inline-block' > 
+      <Image classname={'cursor-pointer'} src={logo} alt={"logo"} /></div>
     </div>
     <div className="w-1/5 h-20 py-5 text-end text-xl font-extrabold font-main-font text-black">
       <h2>{userdata.displayName}</h2>
