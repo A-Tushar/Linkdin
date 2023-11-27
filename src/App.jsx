@@ -16,6 +16,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import Home from './pages/Home.jsx';
 import Rootlayout from './components/Rootlayout.jsx';
 import Feed from './pages/Feed.jsx';
+import Edit from './components/Edit.jsx'
 
 
 
@@ -41,6 +42,10 @@ const router = createBrowserRouter(
           <Route
             path="/feed"
             element={<Feed />}
+          />
+          <Route
+            path="/setting"
+            element={<Edit />}
           />
       </Route>
    </Route>

@@ -12,7 +12,7 @@ import { FaLocationArrow } from "react-icons/fa6";
 import About from '../components/About';
 import Profile from '../components/Profile';
 import Friends from '../components/Friends';
-
+import Edit from '../components/Edit';
 
 
 const Home = () => {
@@ -57,7 +57,7 @@ const Home = () => {
    <div className='w-4/5 h-96 bg-slate-300 mx-auto my-5'>
     <div className="w-full h-2/4 relative">
       <Image classname={"object-cover object-center w-full h-full"} src={cover} alt={"cover"} />
-      <button className='py-3 px-2 bg-slate-200 rounded-lg font-main-font text-black absolute top-3 right-3 flex w-32 justify-between'> <CiEdit /> Edit Profile </button>
+      <button onClick={()=>{navigate("/setting")}} className='py-3 px-2 bg-slate-200 rounded-lg font-main-font text-black absolute top-3 right-3 flex w-32 justify-between'> <CiEdit /> Edit Profile </button>
     </div>
     <div className="w-full h-2/4  relative">
       <Image classname={"h-44 w-44 rounded-full object-cover absolute top-[-20%] left-11"} src={userdata.photoURL} />
