@@ -17,6 +17,9 @@ import Home from './pages/Home.jsx';
 import Rootlayout from './components/Rootlayout.jsx';
 import Feed from './pages/Feed.jsx';
 import Edit from './components/Edit.jsx'
+import Network from './pages/Network.jsx';
+import Chat from './pages/Chat.jsx';
+import  Notifications  from './pages/Notifications.jsx';
 
 
 
@@ -46,6 +49,18 @@ const router = createBrowserRouter(
           <Route
             path="/setting"
             element={<Edit />}
+          />
+          <Route
+            path="/network"
+            element={<Network />}
+          />
+          <Route
+            path="/chat"
+            element={<Chat />}
+          />
+          <Route
+            path="/notifications"
+            element={<Notifications />}
           />
       </Route>
    </Route>

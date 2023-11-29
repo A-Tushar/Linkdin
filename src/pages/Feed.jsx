@@ -4,6 +4,10 @@ import Postbox from '../components/Postbox'
 import Posts from '../components/Posts'
 
 const Feed = () => {
+
+
+ 
+
   return (
     <>
     <div className="flex w-11/12 mx-auto my-4">

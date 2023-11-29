@@ -8,6 +8,12 @@ import 'react-toastify/dist/ReactToastify.css';
 import { logeduser } from '../slices/activeSlice';
 import { useSelector, useDispatch, } from 'react-redux';
 import { Link , useNavigate } from 'react-router-dom'
+import { FaNewspaper,FaUserFriends } from "react-icons/fa";
+import { BiSolidChat } from "react-icons/bi";
+import { IoNotifications } from "react-icons/io5";
+
+
+
 
 
 
@@ -76,15 +82,45 @@ const Navbar = () => {
 
   let handlehome=()=>{
     navigate("/home")
-  }
+  };
+  let handlepost =()=>{
+    navigate("/feed")
+    
+  };
+  let handlenetwork =()=>{
+    navigate("/network")
+    
+  };
 
   return (
    <>
    <div className="w-100% h-20 border-solid flex justify-between items-center border-b border-b-slate-500">
-    <div className="h-20 w-1/2 p-5 text-left box-border">
-      <div onClick={handlehome} className='inline-block' > 
-      <Image classname={'cursor-pointer'} src={logo} alt={"logo"} /></div>
+    <div className="h-20 w-1/2 p-5 text-left box-border flex">
+      <div onClick={handlehome} className='inline-block w-1/5' > 
+      <Image classname={'cursor-pointer'} src={logo} alt={"logo"} />
+      </div>
+
+    <div className="w-4/5 flex justify-between">
+      <div onClick={handlepost} className='cursor-pointer box-border w-1/5 flex flex-col items-center'>
+      <FaNewspaper className='text-4xl text-sky-800 ' />
+      <h3 className='text-center text-xs font-main-font font-bold uppercase tracking-wide text-[#181818]'>Feed</h3>
+      </div>
+      <div onClick={()=>{ navigate("/network")}} className='cursor-pointer box-border w-1/5 flex flex-col items-center'>
+      <FaUserFriends className='text-4xl text-sky-800 ' />
+      <h3 className='text-center text-xs font-main-font font-bold uppercase tracking-wide text-[#181818]'>Network</h3>
+      </div>
+      <div onClick={()=>{ navigate("/chat")}} className='cursor-pointer box-border w-1/5 flex flex-col items-center'>
+      <BiSolidChat className='text-4xl text-sky-800 ' />
+      <h3 className='text-center text-xs font-main-font font-bold uppercase tracking-wide text-[#181818]'>Chat</h3>
+      </div>
+      <div onClick={()=>{ navigate("/notifications")}} className='cursor-pointer box-border w-1/5 flex flex-col items-center'>
+      <IoNotifications  className='text-4xl text-sky-800 ' />
+      <h3 className='text-center text-xs font-bold font-main-font  uppercase tracking-wide text-[#181818]'>Notificatioins</h3>
+      </div>
     </div>
+
+    </div>
+
     <div className="w-1/5 h-20 py-5 text-end text-xl font-extrabold font-main-font text-black">
       <h2>{userdata.displayName}</h2>
     </div>
