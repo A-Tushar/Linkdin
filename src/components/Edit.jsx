@@ -38,15 +38,15 @@ let handleinfo=(e)=>{
       <Image classname={"object-cover object-center w-full h-full"} src={cover} alt={"cover"} />
       <button onClick={()=>{navigate("/setting")}} className='py-3 px-2 bg-slate-200 rounded-lg font-main-font text-black absolute top-3 right-3 flex w-32 justify-between'> <CiEdit /> Edit Profile </button>
     </div>
-    <div className="w-full relative">
+    <div className="w-full relative py-2">
       <Image classname={"h-44 w-44 rounded-full object-cover absolute top-[-20%] left-11"} src={userdata.photoURL} />
       <h1 className=' mb-2 font-main-font font-bold text-3xl text-black ml-64 mt-6 '>{userdata.displayName}
       </h1>
-      <input onChange={handleinfo} name='bio' placeholder='write your Bio ' className='rounded p-2 ml-64 font-main-font font-normal text-base w-2/4 ' type="text" />
-      <input onChange={handleinfo} name='location' placeholder='Adress' className=' my-2 rounded p-2 ml-64 font-main-font font-normal text-base w-2/4 ' type="text" />
-      <input onChange={handleinfo} name='about' placeholder='About You' className='rounded p-2 ml-64 font-main-font font-normal text-base w-2/4 ' type="text" />
+      <input onChange={handleinfo} name='bio' placeholder='write your Bio ' className=' rounded p-2 ml-64 font-main-font font-normal text-base w-2/4 ' type="text" />
+      <input onChange={handleinfo} name='location' placeholder='Adress' className='my-2 rounded p-2 ml-64 font-main-font font-normal text-base w-2/4 ' type="text" />
+      <input onChange={handleinfo} name='about' placeholder='About You' className=' rounded p-2 ml-64 font-main-font font-normal text-base w-2/4 ' type="text" />
      
-      <button className='bg-sky-800 text-md text-white font-main-font font-semibold px-11 py-2 rounded-sm ml-64 my-3 uppercase hover:bg-sky-400 duration-300'>Save</button>
+      <button className=' absolute right-5 bottom-5 bg-sky-800 text-md text-white font-main-font font-semibold px-3 rounded-sm uppercase hover:bg-sky-400 duration-300'>Save</button>
     </div>
    </div>
     </>
