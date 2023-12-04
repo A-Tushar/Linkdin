@@ -10,9 +10,9 @@ import cover from '../assets/cover.jpg'
 import { CiEdit } from "react-icons/ci";
 import { FaLocationArrow } from "react-icons/fa6";
 import About from '../components/About';
-import Profile from '../components/Profile';
-import Friends from '../components/Friends';
+import Profile from '../components/Profile'
 import Edit from '../components/Edit';
+import Friendlist from '../components/Friendlist';
 
 
 const Home = () => {
@@ -88,7 +88,7 @@ const Home = () => {
     }
    </div>
     {profile && <Profile/>}
-    {friend && <Friends/>}
+    {friend && <Friendlist />}
     {/* {post && <Friends/>} */}
    </>
   )

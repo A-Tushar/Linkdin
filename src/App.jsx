@@ -20,6 +20,7 @@ import Edit from './components/Edit.jsx'
 import Network from './pages/Network.jsx';
 import Chat from './pages/Chat.jsx';
 import  Notifications  from './pages/Notifications.jsx';
+import Friendlist from './components/Friendlist.jsx';
 
 
 
@@ -61,6 +62,10 @@ const router = createBrowserRouter(
           <Route
             path="/notifications"
             element={<Notifications />}
+          />
+          <Route
+            path="/fnd"
+            element={<Friendlist />}
           />
       </Route>
    </Route>

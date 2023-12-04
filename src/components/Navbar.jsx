@@ -94,7 +94,7 @@ const Navbar = () => {
 
   return (
    <>
-   <div className="w-100% h-20 border-solid flex justify-between items-center border-b border-b-slate-500">
+   <div className=" static w-100% h-20 border-solid flex justify-between items-center border-b border-b-slate-500">
     <div className="h-20 w-1/2 p-5 text-left box-border flex">
       <div onClick={handlehome} className='inline-block w-1/5' > 
       <Image classname={'cursor-pointer'} src={logo} alt={"logo"} />
