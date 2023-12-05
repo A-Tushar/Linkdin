@@ -31,7 +31,8 @@ const Registration = () => {
     setNameerror("")
     setEmailerror("")
     setPassworderror("")
-  }
+  };
+
   useEffect(()=>{
     if(data){
       navigate("/home")

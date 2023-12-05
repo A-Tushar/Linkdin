@@ -6,6 +6,8 @@ import Image from '../components/Image';
 import cover from '../assets/cover.jpg'
 import { CiEdit } from "react-icons/ci";
 import { FaLocationArrow } from "react-icons/fa6";
+import { Button, Modal } from 'flowbite-react';
+
 
 const Edit = () => {
   let navigate = useNavigate();
@@ -17,7 +19,8 @@ const Edit = () => {
     bio:"",
     location:"",
     about:"",
-  })
+  });
+  const [openModal, setOpenModal] = useState(false);
 
 
 let handleinfo=(e)=>{
@@ -49,6 +52,9 @@ let handleinfo=(e)=>{
       <button className=' absolute right-5 bottom-5 bg-sky-800 text-md text-white font-main-font font-semibold px-3 rounded-sm uppercase hover:bg-sky-400 duration-300'>Save</button>
     </div>
    </div>
+
+  
+
     </>
   )
 }

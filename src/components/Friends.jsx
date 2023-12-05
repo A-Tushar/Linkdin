@@ -51,6 +51,20 @@ const Friends = () => {
           });
           },[]);
 
+          useEffect(()=>{
+
+            const userRef = ref(db, 'friendlist');
+            onValue(userRef, (snapshot) => {
+            let arr=[]
+            snapshot.forEach(item=>{
+              arr.push(item.val().whoreceiveid+item.val().whosendid);
+            })
+            setFriendlist(arr);
+            console.log("fnd",friendlist);
+            
+            });
+            },[]);
+
   return (
     <>
     <div className='w-4/5 mx-auto h-40 mt-3 flex flex-wrap justify-center '>
@@ -66,8 +80,17 @@ const Friends = () => {
            <button className=' bg-sky-500 inline-block h-6 px-4 rounded-lg text-white my-auto ml-6'>
           Pending</button>
         :
+        <>
+        {friendlist.includes(item.userid+userdata.uid)||friendlist.includes(userdata.uid+item.userid)?
+
+        <button className= 'bg-sky-500 inline-block h-6 px-4 rounded-lg text-white my-auto ml-6'>
+        Friend</button>
+          :
         <button onClick={()=>handlefriendrequest(item)} className= 'bg-sky-500 inline-block h-6 px-4 rounded-lg text-white my-auto ml-6'>
            Add Friend</button>
+        }
+        </>
+        
         }
         </div>
      )}

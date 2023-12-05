@@ -40,9 +40,9 @@ const Friendrequest = () => {
 
   return (
     <>
-    <div className='w-4/5 mx-auto h-40 mt-3 flex flex-wrap justify-center'>
+    <div className='w-4/5 mx-auto h-40  mt-3 flex flex-wrap justify-center'>
     {requeslist.map(item=>
-        <div className='w-[45%] h-32 p-4 flex  rounded-md my-4 mx-2 bg-[#F7F9FB] border border-solid border-gray-300' >
+        <div className='w-[45%]  p-4 flex  rounded-md my-4 mx-2 bg-[#F7F9FB] border border-solid border-gray-300' >
         {/* <Image classname={"w-[100px] h-[100px] rounded-full object-cover inline-block"} src={item.profile_picture} /> */}
         <div className='flex flex-col'>
         <h1 className="text-lg ml-4 mt-3 font-medium font-main-font text-black" >{item.whosendname}</h1>

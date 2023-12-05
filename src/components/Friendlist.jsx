@@ -4,6 +4,7 @@ import bg from '../assets/cover.jpg'
 import { getDatabase, ref,onValue, set,push,remove } from "firebase/database";
 import { useSelector } from 'react-redux';
 
+
 const Friendlist = () => {
 
     const db = getDatabase();
@@ -61,15 +62,18 @@ const Friendlist = () => {
         </div>
         
         
-        <button  className=' bg-sky-500 inline-block h-6 px-4 rounded-lg text-white my-auto ml-6'> Block</button>
-        <button onClick={()=>handleunfriend(item)}  className= 'bg-sky-500 inline-block h-6 px-4 rounded-lg text-white my-auto ml-6'>
+        <button  className=' bg-red-500 inline-block h-6 px-4 rounded-lg text-white my-auto ml-6'> Block</button>
+        <button onClick={()=>handleunfriend(item)}  className= 'bg-pink-500 inline-block h-6 px-4 rounded-lg text-white my-auto ml-6'>
            Unfriend</button>
         <button  className= 'bg-sky-500 inline-block h-6 px-4 rounded-lg text-white my-auto ml-6'>
            Massage</button>
 
         </div>
+
+
      )}
     </div>
+    
     </>
   )
 }
