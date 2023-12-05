@@ -18,6 +18,7 @@ import { Button, Modal } from 'flowbite-react';
 import { Label, TextInput } from 'flowbite-react';
 
 
+
 const Home = () => {
   const db = getDatabase();
   let userdata = useSelector((state)=>(state.active.value));
@@ -182,10 +183,10 @@ const Home = () => {
       <Modal show={openModaltwo} onClose={() => setOpenModaltwo(false)}>
         <Modal.Header>{userdata.displayName}</Modal.Header>
         <Modal.Body>
-           aaaa
+         <h1>hello vhai </h1>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={() => setOpenModaltwo(false)}>I accept</Button>
+          <Button onClick={() => setOpenModaltwo(false)}>Save</Button>
           <Button color="gray" onClick={() => setOpenModaltwo(false)}>
             Decline
           </Button>

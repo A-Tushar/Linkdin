@@ -1,12 +1,14 @@
 import React from 'react'
 import Image from './Image'
 import logo from '../assets/ex.png'
+import { Button, Modal } from 'flowbite-react';
 
 const Experience = () => {
   return (
   <>
   <div className="w-4/5 h-96 border-2  border-blue-200 rounded-sm overflow-y-scroll mx-auto m-3">
-        <div className="w-full p-8 ">
+        <div className=" relative w-full p-8 ">
+        <Button className=' absolute top-3 right-3' onClick={() => setOpenModal(true)}>Add Experience</Button>
         <h1 className='font-main-font  text-xl font-bold text-black pb-3 '>Exprience</h1>
         <div className=" w-full h-1/4 py-4 flex">
             <Image classname={"w-14 h-14 object-contain"} src={logo}/>
