@@ -3,6 +3,7 @@ import { CiImageOn } from "react-icons/ci";
 import { getDatabase, ref,onValue, set,push, remove } from "firebase/database";
 import { getStorage, ref as imgref,uploadBytes,getDownloadURL, } from "firebase/storage";
 import { useSelector } from 'react-redux';
+import Image from './Image'
 
 const Postbox = () => {
     const db = getDatabase();
@@ -10,7 +11,8 @@ const Postbox = () => {
     let userinfo = useSelector((state)=>(state.active.value));
     let [requeslist,setRequestlist]=useState([]);
     let [postdata,setPostdata]=useState('')
-    let [imgurl,setImgurl]=useState("");
+    let [imgurl,setImgurl]=useState(""); 
+    const [image, setImage] = useState(null);
 
     // const fileInputRef = useRef(null);
     // const handleButtonClick = () => {
@@ -28,6 +30,8 @@ const Postbox = () => {
         });
 
         setPostdata('')
+        setImage('')
+
         }
         
     };
@@ -44,6 +48,7 @@ const Postbox = () => {
         getDownloadURL(storageRef).then((downloadURL) => {
             console.log('File available at', downloadURL);
             setImgurl(downloadURL);
+            setImage(downloadURL)
           });
           
         });
@@ -64,7 +69,10 @@ const Postbox = () => {
         </label>
         <button onClick={handlepost}
        className='border-2 border-solid text-white bg-sky-800 rounded-xl text-center box-border hover:bg-sky-400 duration-300 px-5 py-2 '>Post</button>
+        
     </div>
+     <div className='w-full'>
+        <Image classname={'p-5 h-max-52 w-max-52  object-contain mx-auto'} src={image}/></div>
    </div>
    </>
   )
