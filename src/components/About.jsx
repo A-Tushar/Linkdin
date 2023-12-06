@@ -31,9 +31,9 @@ const About = () => {
     <>
     <div className="mx-auto w-4/5 py-3">
         <div className="w-full p-8 border-2  border-blue-200 rounded-sm">
-            <h1 className='font-main-font  text-xl font-bold text-black pb-3 '>About</h1>
+            <h1 className='font-main-font  text-2xl font-bold text-sky-800 pb-3 '>About</h1>
             {aboutdata.map(item=>
-            <p className='w-11/12 font-main-font  text-lg font-normal text-black'>{item.about}</p>
+            <p className='w-11/12 font-main-font text-lg font-normal text-black'>{item.about}</p>
               )}
             <p className='text-sky-500 font-main-font font-light text-base cursor-pointer pt-2'>see more...</p>
         </div>

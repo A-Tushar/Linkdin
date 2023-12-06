@@ -12,7 +12,7 @@ const Network = () => {
     <div className='w-full flex'>
     <div className='w-1/5'>
         <div className='mx-auto mt-5 w-4/5 h-8  box-border px-3 border-b border-solid border-sky-300'>
-            <h2 className='font-main-font font-medium text-lg uppercase inline-block'>Connections</h2>
+            <h2 className='font-main-font font-medium text-lg uppercase inline-block'>Friends</h2>
         </div>
         <div className='mx-auto  w-4/5 h-8  box-border px-3 border-b border-solid border-sky-300'>
             <h2 className='font-main-font font-medium text-lg uppercase inline-block'>My Groups</h2>

@@ -101,6 +101,27 @@ const Home = () => {
     });
     setOpenModal(false)
   };
+  let handleimage =(e)=>{
+        
+    const storageRef = imgref(storage, e.target.files[0].name);
+    uploadBytes(storageRef, e.target.files[0]).then((snapshot) => {
+    // console.log('Uploaded a blob or file!');
+    getDownloadURL(storageRef).then((downloadURL) => {
+        console.log('File available at', downloadURL);
+        setImgurl(downloadURL);
+        
+      });
+      
+    });
+};
+
+  const [image, setImage] = useState(null);
+
+  const onImageChange = (event) => {
+  if (event.target.files && event.target.files[0]) {
+    setImage(URL.createObjectURL(event.target.files[0]));
+  }
+  };
 
   return (
    <>
@@ -111,7 +132,12 @@ const Home = () => {
     </div>
     <div  className="w-full h-2/4  relative">
       <div className=' cursor-pointer' onClick={()=>setOpenModaltwo(true)}><Image  classname={"h-44 w-44 rounded-full object-cover absolute top-[-20%] left-11"} src={userdata.photoURL} /></div>
-      <p className=' absolute top-0 right-40 font-serif font-normal text-xs flex'> <FaLocationArrow className='mr-2 text-red-500' />Location</p>
+      {aboutdata.map(item=> 
+      <div>
+       <p className=' absolute top-0 right-40 font-serif font-normal text-md flex items-center'> <FaLocationArrow className='mr-2 text-red-500' />{item.adress}</p>
+      </div>
+        )}
+      
       <h1 className='font-main-font font-bold text-3xl text-black ml-64 mt-6 '>{userdata.displayName}
       </h1>
       {aboutdata.map(item=> 
@@ -180,7 +206,7 @@ const Home = () => {
         </Modal.Footer>
       </Modal>
 
-
+        {/* 2nd modal is for upload and showing profile picture */}
       <Modal show={openModaltwo} onClose={() => setOpenModaltwo(false)}>
         <Modal.Header>{userdata.displayName}</Modal.Header>
         <Modal.Body>
@@ -188,9 +214,12 @@ const Home = () => {
         <Button>See Profile picture</Button>
          <label> 
         <CiImageOn  className='font-black text-5xl ' />
-        <input  className='hidden' type="file" accept='image/*' />
+        <input onChange={handleimage} className='hidden' type="file" accept='image/*' />
         </label>
         </div>
+
+        <input type="file" onChange={onImageChange} className="filetype" />
+        <img alt='' src={image}/>
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={() => setOpenModaltwo(false)}>Save</Button>
