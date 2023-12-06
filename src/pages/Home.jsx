@@ -8,14 +8,15 @@ import { useSelector, useDispatch, } from 'react-redux';
 import { Link , useNavigate } from 'react-router-dom'
 import Image from '../components/Image';
 import cover from '../assets/cover.jpg'
-import { CiEdit } from "react-icons/ci";
+import { CiEdit, } from "react-icons/ci";
+import { CiImageOn } from "react-icons/ci";
 import { FaLocationArrow } from "react-icons/fa6";
 import About from '../components/About';
 import Profile from '../components/Profile'
 import Edit from '../components/Edit';
 import Friendlist from '../components/Friendlist';
 import { Button, Modal } from 'flowbite-react';
-import { Label, TextInput } from 'flowbite-react';
+import { FileInput, Label, TextInput } from 'flowbite-react';
 
 
 
@@ -183,7 +184,13 @@ const Home = () => {
       <Modal show={openModaltwo} onClose={() => setOpenModaltwo(false)}>
         <Modal.Header>{userdata.displayName}</Modal.Header>
         <Modal.Body>
-         <h1>hello vhai </h1>
+        <div className="flex flex-wrap gap-x-5">
+        <Button>See Profile picture</Button>
+         <label> 
+        <CiImageOn  className='font-black text-5xl ' />
+        <input  className='hidden' type="file" accept='image/*' />
+        </label>
+        </div>
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={() => setOpenModaltwo(false)}>Save</Button>
