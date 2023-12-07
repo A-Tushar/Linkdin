@@ -24,6 +24,7 @@ const Posts = () => {
     })
 
     setPosts(arr);
+    posts.reverse();
     console.log("postid",posts);
 
     });
