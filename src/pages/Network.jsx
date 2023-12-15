@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import Friendrequest from '../components/Friendrequest';
 import Friends from '../components/Friends';
 import Sendrequest from '../components/Sendrequest';
+import { Sidebar } from 'flowbite-react';
+import { HiArrowSmRight, HiChartPie, HiInbox, HiShoppingBag, HiTable, HiUser, HiViewBoards } from 'react-icons/hi';
 
 const Network = () => {
     let [req,setReq]=useState(true);
@@ -11,18 +13,27 @@ const Network = () => {
     <>
     <div className='w-full flex'>
     <div className='w-1/5'>
-        <div className='mx-auto mt-5 w-4/5 h-8  box-border px-3 border-b border-solid border-sky-300'>
-            <h2 className='font-main-font font-medium text-lg uppercase inline-block'>Friends</h2>
-        </div>
-        <div className='mx-auto  w-4/5 h-8  box-border px-3 border-b border-solid border-sky-300'>
-            <h2 className='font-main-font font-medium text-lg uppercase inline-block'>My Groups</h2>
-        </div>
-        <div className='mx-auto  w-4/5 h-8  box-border px-3 border-b border-solid border-sky-300'>
-            <h2 className='font-main-font font-medium text-lg uppercase inline-block'>Groups</h2>
-        </div>
-        <div className='mx-auto  w-4/5 h-8  box-border px-3 border-b border-solid border-sky-300'>
-            <h2 className='font-main-font font-medium text-lg uppercase inline-block'>Pages</h2>
-        </div>
+       
+    <Sidebar aria-label="Default sidebar example">
+      <Sidebar.Items>
+        <Sidebar.ItemGroup>
+          <Sidebar.Item  icon={HiChartPie}>
+            Newsfeed 
+          </Sidebar.Item>
+          <Sidebar.Item  icon={HiViewBoards} label="Pro" labelColor="dark">
+            Requests
+          </Sidebar.Item>
+          <Sidebar.Item  icon={HiInbox} label="3">
+            Inbox
+          </Sidebar.Item>
+          <Sidebar.Item  icon={HiUser}>
+            Users
+          </Sidebar.Item>
+          
+        </Sidebar.ItemGroup>
+      </Sidebar.Items>
+    </Sidebar>
+
     </div>
 
     <div className="w-3/5 mt-4">
