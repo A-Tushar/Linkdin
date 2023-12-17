@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, userRef , createRef} from 'react'
 import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { getDatabase, ref, set,push,onValue } from "firebase/database";
 import { toast , ToastContainer } from 'react-toastify';
@@ -17,6 +17,8 @@ import Edit from '../components/Edit';
 import Friendlist from '../components/Friendlist';
 import { Button, Modal } from 'flowbite-react';
 import { FileInput, Label, TextInput } from 'flowbite-react';
+import Cropper from "react-cropper";
+import "cropperjs/dist/cropper.css";
 
 
 
@@ -35,6 +37,7 @@ const Home = () => {
   const [openModaltwo, setOpenModaltwo] = useState(false);
   let [aboutdata,setaboutdata]=useState([]);
 
+ 
       
   useEffect(()=>{
     if(!data){
@@ -71,7 +74,7 @@ const Home = () => {
       }
     })
     setaboutdata(arr);
-    console.log(arr,"bio");
+    // console.log(arr,"bio");
     });
     },[]);
   
@@ -115,13 +118,36 @@ const Home = () => {
     });
 };
 
-  const [image, setImage] = useState(null);
+ 
 
-  const onImageChange = (event) => {
-  if (event.target.files && event.target.files[0]) {
-    setImage(URL.createObjectURL(event.target.files[0]));
-  }
+  // image cropper 
+  const defaultSrc =
+  "https://raw.githubusercontent.com/roadmanfong/react-cropper/master/example/img/child.jpg";
+  const [image, setImage] = useState(defaultSrc);
+  const [cropData, setCropData] = useState("#");
+  const cropperRef = createRef();
+  const onChange = (e) => {
+    e.preventDefault();
+    let files;
+    if (e.dataTransfer) {
+      files = e.dataTransfer.files;
+    } else if (e.target) {
+      files = e.target.files;
+    }
+    const reader = new FileReader();
+    reader.onload = () => {
+      setImage(reader.result);
+    };
+    reader.readAsDataURL(files[0]);
   };
+
+  const getCropData = () => {
+    if (typeof cropperRef.current?.cropper !== "undefined") {
+      setCropData(cropperRef.current?.cropper.getCroppedCanvas().toDataURL());
+    }
+  };
+  // imag cropper end 
+
 
   return (
    <>
@@ -131,7 +157,9 @@ const Home = () => {
       <Button className=' absolute top-5 right-5' onClick={() => setOpenModal(true)}> <CiEdit/> Edit Profile</Button>
     </div>
     <div  className="w-full h-2/4  relative">
-      <div className=' cursor-pointer' onClick={()=>setOpenModaltwo(true)}><Image  classname={"h-44 w-44 rounded-full object-cover absolute top-[-20%] left-11"} src={userdata.photoURL} /></div>
+      <div className=' cursor-pointer' onClick={()=>setOpenModaltwo(true)}>
+        <Image  classname={"h-44 w-44 rounded-full object-cover absolute top-[-20%] left-11"} src={userdata.photoURL} />
+      </div>
       {aboutdata.map(item=> 
       <div>
        <p className=' absolute top-0 right-40 font-serif font-normal text-md flex items-center'> <FaLocationArrow className='mr-2 text-red-500' />{item.adress}</p>
@@ -213,13 +241,58 @@ const Home = () => {
         <div className="flex flex-wrap gap-x-5">
         <Button>See Profile picture</Button>
          <label> 
-        <CiImageOn  className='font-black text-5xl ' />
+        <CiImageOn  className='font-black text-5xl text-center inline-block' />
+        <p className='font-bold text-center'>Upload Image</p>
         <input onChange={handleimage} className='hidden' type="file" accept='image/*' />
         </label>
         </div>
 
-        <input type="file" onChange={onImageChange} className="filetype" />
-        <img alt='' src={image}/>
+      <div>
+      <div style={{ width: "100%" }}>
+        <input type="file" onChange={onChange} />
+        <button>Use default img</button>
+        <br />
+        <br />
+        <Cropper
+          ref={cropperRef}
+          style={{ height: 400, width: "100%" }}
+          zoomTo={0.5}
+          initialAspectRatio={1}
+          preview='overflow:hidden'
+          src={image}
+          viewMode={1}
+          minCropBoxHeight={10}
+          minCropBoxWidth={10}
+          background={false}
+          responsive={true}
+          autoCropArea={1}
+          guides={true}
+        />
+      </div>
+      <div>
+        <div className=" inline-block box-border p-2" style={{ width: "50%", float: "right" }}>
+          <h1>Preview</h1>
+          <div
+            className="img-preview"
+            style={{ width: "100%", float: "left", height: "300px" }}
+          />
+        </div>
+        <div
+          className=" inline-block box-border p-2"
+          style={{ width: "50%", float: "right", height: "300px" }}
+        >
+          <h1>
+            <span>Crop</span>
+            <button style={{ float: "right" }} onClick={getCropData}>
+              Crop Image
+            </button>
+          </h1>
+          <img style={{ width: "100%" }} src={cropData} alt="cropped" />
+        </div>
+      </div>
+      <br style={{ clear: "both" }} />
+      </div>
+       
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={() => setOpenModaltwo(false)}>Save</Button>

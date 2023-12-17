@@ -21,6 +21,7 @@ const Account = () => {
 
   return (
     <>
+    {/* feed rightside profileinfo */}
     <div className="w-[290px] h-[280px] mx-auto ">
         <div className="w-full h-2/5">
             <Image classname={'w-full h-full object-cover'} src={cover}/>

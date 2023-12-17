@@ -5,7 +5,7 @@ import Message from '../components/Message'
 const Chat = () => {
   return (
    <>
-   <div className='flex justify-between mx-10 my-10'>
+   <div className='flex justify-between mx-10 mt-10'>
     <div className='w-3/12 h-[600px]  border border-gray-100 rounded-xl shadow-xl overflow-hidden'>
     <div className=" mx-auto w-72 text-lg font-semibold font-main-font text-left py-5 border-b border-gray-400 box-border">
             Chats
