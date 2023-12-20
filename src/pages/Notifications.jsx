@@ -1,8 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react';
+
 
 const Notifications = () => {
+
+
+
   return (
-    <div>Notifications</div>
+    <>
+    <div>
+     notifications
+      
+    </div>
+    </>
   )
 }
 
