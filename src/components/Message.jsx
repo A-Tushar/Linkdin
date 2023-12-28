@@ -1,9 +1,28 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { getDatabase, ref,onValue, set,push,remove } from "firebase/database";
+import { useSelector, useDispatch, } from 'react-redux';
 import { Button, TextInput } from 'flowbite-react';
 import { BsEmojiGrin } from "react-icons/bs";
 
 
 const Message = () => {
+        const db = getDatabase();
+        let userdata = useSelector((state)=>(state.active.value));
+        let dispatch = useDispatch();
+        let [msg,setMsg]= useState("")
+
+        let handlemsg =(e)=>{
+               setMsg(e.target.value);
+        // set(push(ref(db, 'msg')), {
+                
+        //         });
+        };
+
+        let handlesendmsg=()=>{
+                console.log(msg);
+        };
+
+
   return (
     <>
     <div className="h-[90%] border-b border-gray-300">
@@ -31,10 +50,10 @@ const Message = () => {
     </div>
 
 
-    <div className=" mx-[5%] flex gap-x-2 py-2 items-center">
-        <TextInput className=' w-4/5' type="text" />
+    <div className="mx-[5%] flex gap-x-2 py-2 items-center">
+        <TextInput onChange={handlemsg} className=' w-4/5' type="text" />
         <BsEmojiGrin className='font-bold text-2xl text-sky-900' />
-        <Button> Send</Button>
+        <Button onClick={handlesendmsg} >Send</Button>
     </div>
     </>
   )

@@ -9,6 +9,7 @@ const Friendlist = () => {
 
     const db = getDatabase();
     let userinfo = useSelector((state)=>(state.active.value));
+    
     let [friendlist,setFriendlist]=useState([]);
 
 
@@ -48,18 +49,19 @@ const Friendlist = () => {
         <div className='w-[45%]  p-4 flex  rounded-md my-4 mx-2 bg-[#F7F9FB] border border-solid border-gray-300' >
         <Image classname={"w-[100px] h-[100px] rounded-full object-cover inline-block"} src={bg} />
         <div className='flex flex-col'>
-        {item.whosendid = userinfo.uid ? 
+        {item.whosendid == userinfo.uid ? 
         <>
-        <h1 className="text-lg ml-4 mt-3 font-medium font-main-font text-black" >{item.whoreceivename}</h1>
+       <h1 className="text-lg ml-4 mt-3 font-medium font-main-font text-black" >{item.whoreceivename}</h1>
         <h5 className="text-sm ml-4 font-normal font-main-font text-black" >{item.whoreceivename}</h5>
         </>
         :
         <> 
-        <h1 className="text-lg ml-4 mt-3 font-medium font-main-font text-black" >{item.whosendname}</h1>
+         <h1 className="text-lg ml-4 mt-3 font-medium font-main-font text-black" >{item.whosendname}</h1>
         <h5 className="text-sm ml-4 font-normal font-main-font text-black" >{item.whosendname}</h5>
         </>
         }
         </div>
+        
         
         
         <button  className=' bg-red-500 inline-block h-6 px-4 rounded-lg text-white my-auto ml-6'> Block</button>
