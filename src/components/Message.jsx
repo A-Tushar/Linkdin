@@ -65,8 +65,12 @@ const Message = () => {
   return (
     <>
     <div className="h-[90%] border-b border-gray-300">
-        <div className="w-full  flex py-10 border-b border-gray-600">
-        <p className='font-main-font font-bold text-base pl-10 pr-5'>Chat With  {activechat.activechatname} </p>
+      {activechat== ""? 
+       <h2 className='font-main-font font-extrabold text-5xl text-sky-500 text-center mt-5 '>Chose someone to Massage</h2>
+      :
+      <>
+       <div className="w-full  flex py-10 border-b border-gray-600">
+        <p className='font-main-font font-extrabold text-sky-900 text-lg pl-10 pr-5'>Chat With  {activechat.activechatname} </p>
         <p className='font-main-font font-medium text-base'>Active 0 min ago</p>
         </div>
 
@@ -81,10 +85,10 @@ const Message = () => {
         <div className="">
         <p className='my-[1px] inline-block mx-5  py-1 px-2 bg-sky-100 rounded-sm font-main-font font-medium text-base '>{item.massage}</p>
         </div>}
-        </>
-        )}
+
         {/* Image tags */}
-        <div className='w-80 object-cover my-1 mx-3 p-1 bg-slate-300 rounded'>
+
+        {/* <div className='w-80 object-cover my-1 mx-3 p-1 bg-slate-300 rounded'>
         <ModalImage
             small={cover}
             large={cover}
@@ -99,34 +103,43 @@ const Message = () => {
             alt="Hello World!"
           />
         </div> 
-        </div>
-        {/* audio tags */}
-        <div className='flex justify-end'>
-        <div className='w-80 object-cover my-1 mx-3 p-1'>
-        <audio controls></audio>
-        </div> 
-        </div>
-        
-        <div className='w-80 object-cover my-1 mx-3 p-1'>
-        <audio controls></audio>
-        </div>
-         {/*video tags */}
-        <div className='flex justify-end'>
-        <div className='w-80 object-cover my-1 mx-3 p-1'>
-        <video width="320" height="240" controls></video>
-        </div> 
-        </div>
-        
-        <div className='w-80 object-cover my-1 mx-3 p-1'>
-        <video width="320" height="240" controls></video>
-        </div> 
-        
-         
-        
-       </div>
-        
-    </div>
+        </div> */}
 
+        {/* audio tags */}
+
+        {/* <div className='flex justify-end'>
+        <div className='w-80 object-cover my-1 mx-3 p-1'>
+        <audio controls></audio>
+        </div> 
+        </div>
+        
+        <div className='w-80 object-cover my-1 mx-3 p-1'>
+        <audio controls></audio>
+        </div> */}
+
+         {/*video tags */}
+
+        {/* <div className='flex justify-end'>
+        <div className='w-80 object-cover my-1 mx-3 p-1'>
+        <video width="320" height="240" controls></video>
+        </div> 
+        </div>
+        
+        <div className='w-80 object-cover my-1 mx-3 p-1'>
+        <video width="320" height="240" controls></video>
+        </div>  */}
+        
+          </>
+        )}
+        
+       </div> 
+       </>
+      }
+
+     
+      
+    </div>
+ 
 
     <div className="mx-[5%] flex gap-x-2 py-2 items-center">
         <TextInput onChange={handlemsg} value={msg} className=' w-4/5' type="text" />

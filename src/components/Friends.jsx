@@ -71,9 +71,9 @@ const Friends = () => {
      {users.map(item=>
         <div className='w-[45%]  p-4 flex  rounded-md my-4 mx-2 bg-[#F7F9FB] border border-solid border-gray-300' >
         <Image classname={"w-[100px] h-[100px] rounded-full object-cover inline-block"} src={item.profile_picture} />
-        <div className='flex flex-col'>
-        <h1 className="text-lg ml-4 mt-3 font-medium font-main-font text-black" >{item.username}</h1>
-        <h5 className="text-sm ml-4 font-normal font-main-font text-black" >{item.username}</h5>
+        <div >
+        <h1 className="text-lg ml-4 mt-3 font-medium font-main-font text-black w-1/2" >{item.username}</h1>
+        {/* <h5 className="text-sm ml-4 font-normal font-main-font text-black" >{item.username}</h5> */}
         </div>
         {requestlist.includes(item.userid+userdata.uid)||requestlist.includes(userdata.uid+item.userid)?
         

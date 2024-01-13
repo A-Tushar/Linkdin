@@ -9,7 +9,7 @@ const Rootlayout = () => {
   return (
     <>
     <div className='fixed w-full bg-white'><Navbar/></div>
-    <div className='pt-[50px]'><Outlet/></div>
+    <div className='pt-[80px]'><Outlet/></div>
     </>
   )
 }
