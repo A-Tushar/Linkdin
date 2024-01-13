@@ -8,8 +8,8 @@ import Home from '../pages/Home'
 const Rootlayout = () => {
   return (
     <>
-    <Navbar/>
-    <Outlet/>
+    <div className='fixed w-full bg-white'><Navbar/></div>
+    <div className='pt-[50px]'><Outlet/></div>
     </>
   )
 }

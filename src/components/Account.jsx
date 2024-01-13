@@ -17,7 +17,7 @@ const Account = () => {
       navigate("/login")
     }
     console.log(userdata);
-  },[])
+    },[])
 
   return (
     <>

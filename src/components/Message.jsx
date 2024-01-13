@@ -3,6 +3,9 @@ import { getDatabase, ref,onValue, set,push,remove } from "firebase/database";
 import { useSelector, useDispatch, } from 'react-redux';
 import { Button, TextInput } from 'flowbite-react';
 import { BsEmojiGrin } from "react-icons/bs";
+import Image from './Image';
+import cover from '../assets/cover.jpg'
+import ModalImage from "react-modal-image";
 
 
 const Message = () => {
@@ -67,23 +70,57 @@ const Message = () => {
         <p className='font-main-font font-medium text-base'>Active 0 min ago</p>
         </div>
 
-       <div className="mt-5 flex flex-col">
+       <div className="mt-5 flex flex-col h-[80%] overflow-y-scroll">
         {massage.map(item=>
-        
-        item.whosendid == userdata.uid?
+        <>
+        {item.whosendid == userdata.uid?
         <div className="flex justify-end">
-        <p className='my-[1px] inline-block mx-5  py-1 px-2 bg-sky-200 rounded-sm font-main-font font-medium text-base '>{item.massage}</p>
+        <p className='my-[1px] inline-block mx-5  py-1 px-2 bg-sky-300 rounded-sm font-main-font font-medium text-base '>{item.massage}</p>
         </div>
         :
         <div className="">
-        <p className='my-[1px] inline-block mx-5  py-1 px-2 bg-sky-200 rounded-sm font-main-font font-medium text-base '>{item.massage}</p>
-        </div>    
-        
-        
-            
-          
+        <p className='my-[1px] inline-block mx-5  py-1 px-2 bg-sky-100 rounded-sm font-main-font font-medium text-base '>{item.massage}</p>
+        </div>}
+        </>
         )}
-            
+        {/* Image tags */}
+        <div className='w-80 object-cover my-1 mx-3 p-1 bg-slate-300 rounded'>
+        <ModalImage
+            small={cover}
+            large={cover}
+            alt="Hello World!"
+          />
+        </div> 
+        <div className='flex justify-end'>
+        <div className='w-80 object-cover my-1 mx-3 p-1 bg-slate-600 rounded'>
+        <ModalImage
+            small={cover}
+            large={cover}
+            alt="Hello World!"
+          />
+        </div> 
+        </div>
+        {/* audio tags */}
+        <div className='flex justify-end'>
+        <div className='w-80 object-cover my-1 mx-3 p-1'>
+        <audio controls></audio>
+        </div> 
+        </div>
+        
+        <div className='w-80 object-cover my-1 mx-3 p-1'>
+        <audio controls></audio>
+        </div>
+         {/*video tags */}
+        <div className='flex justify-end'>
+        <div className='w-80 object-cover my-1 mx-3 p-1'>
+        <video width="320" height="240" controls></video>
+        </div> 
+        </div>
+        
+        <div className='w-80 object-cover my-1 mx-3 p-1'>
+        <video width="320" height="240" controls></video>
+        </div> 
+        
          
         
        </div>
